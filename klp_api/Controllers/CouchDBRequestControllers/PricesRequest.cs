@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace klp_api.Controllers.CouchDBControllers
 {
-    public class Prices
+    public class PricesRequest
     {
     }
 }

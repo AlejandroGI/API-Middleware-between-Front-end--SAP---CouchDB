@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+//Clase modelo de estructura Json a enviar
 namespace klp_api.Models.BodyRequest.Products
 {
+    
     public class CodeClass
     {
         [JsonProperty("$regex")]

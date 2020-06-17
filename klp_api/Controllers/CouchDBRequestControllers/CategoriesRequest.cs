@@ -1,38 +1,61 @@
-﻿using klp_api.Models.BodyRequest.Products;
+﻿using klp_api.Models.Req;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace klp_api.Controllers.CouchDBControllers
 {
-    class CategoriesRequest
+    public class CategoriesRequest
     {
         public dynamic RequestBody(string code, string name)
         {
-             ValidationSelectorModel jsonObject = new ValidationSelectorModel();
-            jsonObject.selector = new SelectorModel()
+            if (code == null | name == null)
             {
-                code = new CodeClass()
+                code = "";
+                name = "";
+            }
+            ValidationProductsReqBodyModel jsonObject = new ValidationProductsReqBodyModel
+            {
+                selector = new ProductsReqBodyModel()
                 {
-                    regex = code
-                },
-                or = new OrClass()
-                {
-                    name = new NameClass()
+                    code = new CodeClass()
                     {
-                        regex = name
+                        regex = code
+                    },
+                    or = new OrClass[]
+                    {
+                        new OrClass
+                        {
+                            name = new NameClass
+                            {
+                                regex = name
+                            }
+                        }
                     }
-                }
+                },
+                fields = new List<string> { "code", "name" },
+                limit = 10,
+                skip = 0
             };
-            jsonObject.field = new List<string> { "code", "name" };
-            jsonObject.limit = 10;
-            jsonObject.skip = 0;
-            dynamic  json = JsonConvert.SerializeObject(jsonObject);
+            dynamic json = JsonConvert.SerializeObject(jsonObject);
             return json;
+        }
+
+        public async Task<dynamic> RequestAsync(dynamic json)
+        {
+            dynamic jsonOut;
+            dynamic ResponseContent;
+
+            var httpContent = new StringContent(json, null, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                var httpResponse = await httpClient.PostAsync("http://52.250.109.79:5984/products/_find", httpContent);
+                ResponseContent = await httpResponse.Content.ReadAsStringAsync();
+                jsonOut = JsonConvert.DeserializeObject<klp_api.Models.Res.ProductsBodyResModel>(ResponseContent);
+                var StatusCode = (int)httpResponse.StatusCode;
+            }
+            return jsonOut;
         }
     }
 }

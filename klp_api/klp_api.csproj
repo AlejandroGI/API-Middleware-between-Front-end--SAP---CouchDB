@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="Controllers\SAPResponseController\" />
     <Folder Include="Controllers\SAPRequestController\" />
-    <Folder Include="Models\BodyResponse\" />
   </ItemGroup>
 
 

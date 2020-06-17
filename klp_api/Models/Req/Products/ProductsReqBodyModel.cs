@@ -3,10 +3,13 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace klp_api.Models.BodyRequest.Products
+//Clase modelo de estructura Object
+namespace klp_api.Models.Req
 {
+    
     public class CodeClass
     {
         [JsonProperty("$regex")]
@@ -21,10 +24,10 @@ namespace klp_api.Models.BodyRequest.Products
         [JsonProperty("$regex")]
         public string regex { get; set; }
     }
-    public class SelectorModel
+    public class ProductsReqBodyModel
     {
         public CodeClass code { get; set; }
         [JsonProperty("$or")]
-        public OrClass or { get; set; }
+        public OrClass[]  or { get; set; }
     }
 }

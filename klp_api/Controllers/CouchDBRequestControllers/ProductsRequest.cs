@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 
 namespace klp_api.Controllers.CouchDBControllers
 {
-    public class Stock
+    public class ProductsRequest
     {
-        public void StockProduct()
+        public void Product()
+        {
+
+        }
+        public void ProductCode()
         {
 
         }

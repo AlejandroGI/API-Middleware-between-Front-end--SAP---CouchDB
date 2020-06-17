@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\SAPController\" />
-    <Folder Include="Models\BodyResponse\" />
+    <Folder Include="Controllers\SAPResponseController\" />
+    <Folder Include="Controllers\SAPRequestController\" />
   </ItemGroup>
 
 

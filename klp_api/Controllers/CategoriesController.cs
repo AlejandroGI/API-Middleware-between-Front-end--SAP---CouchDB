@@ -13,11 +13,11 @@ namespace klp_api.Controllers
         // GET: api/<CategoriesController>
         //para obtener la lista de categorias. aqui debieses entregar una lista con objetos asi:
         [HttpGet]
-        public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] string name)
+        public async Task<JsonResult> Get([FromHeader] string code, [FromHeader] string name, [FromQuery] int? limit, [FromQuery] int? skip)
         {
             CategoriesRequest Req = new CategoriesRequest();
             CategoriesResponse Res = new CategoriesResponse();
-            dynamic json = Res.RequestBody(code, name);
+            dynamic json = Res.RequestBody(code, name, limit, skip);
             var Request = await Req.RequestAsync(json);
             var h = Res.ResponseBody(Request);
             return new JsonResult(h);

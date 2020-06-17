@@ -8,12 +8,17 @@ namespace klp_api.Controllers.CouchDBControllers
 {
     public class CategoriesRequest
     {
-        public dynamic RequestBody(string code, string name)
+        public dynamic RequestBody(string code, string name, int? limit, int? skip)
         {
             if (code == null | name == null)
             {
                 code = "";
                 name = "";
+            }
+            if (limit == null | skip == null)
+            {
+                limit = 10;
+                skip = 0;
             }
             ValidationProductsReqBodyModel jsonObject = new ValidationProductsReqBodyModel
             {
@@ -35,8 +40,8 @@ namespace klp_api.Controllers.CouchDBControllers
                     }
                 },
                 fields = new List<string> { "code", "name" },
-                limit = 10,
-                skip = 0
+                limit = (int)limit,
+                skip = (int)skip
             };
             dynamic json = JsonConvert.SerializeObject(jsonObject);
             return json;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using klp_api.Models.BodyRequest.Products;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;

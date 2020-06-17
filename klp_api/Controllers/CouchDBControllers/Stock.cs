@@ -7,5 +7,9 @@ namespace klp_api.Controllers.CouchDBControllers
 {
     public class Stock
     {
+        public void StockProduct()
+        {
+
+        }
     }
 }

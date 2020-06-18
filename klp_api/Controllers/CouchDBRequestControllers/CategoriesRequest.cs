@@ -47,17 +47,17 @@ namespace klp_api.Controllers.CouchDBControllers
             return json;
         }
 
-        public async Task<dynamic> RequestAsync(dynamic json)
+        public async Task<dynamic> RequestAsync(dynamic json)   //Agregar endpoint y petición por SAP
         {
             dynamic jsonOut;
             dynamic ResponseContent;
 
-            var httpContent = new StringContent(json, null, "application/json");
-            using (var httpClient = new HttpClient())
+            StringContent httpContent = new StringContent(json, null, "application/json");
+            using (HttpClient httpClient = new HttpClient())
             {
                 var httpResponse = await httpClient.PostAsync("http://52.250.109.79:5984/products/_find", httpContent);
                 ResponseContent = await httpResponse.Content.ReadAsStringAsync();
-                jsonOut = JsonConvert.DeserializeObject<klp_api.Models.Res.ProductsBodyResModel>(ResponseContent);
+                jsonOut = JsonConvert.DeserializeObject<Models.Res.ProductsBodyResModel>(ResponseContent);
                 var StatusCode = (int)httpResponse.StatusCode;
             }
             return jsonOut;

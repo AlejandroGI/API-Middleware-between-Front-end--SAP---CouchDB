@@ -1,15 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 //Clase modelo de estructura Object
 namespace klp_api.Models.Req
 {
-    
+
     public class CodeClass
     {
         [JsonProperty("$regex")]
@@ -28,6 +23,6 @@ namespace klp_api.Models.Req
     {
         public CodeClass code { get; set; }
         [JsonProperty("$or")]
-        public OrClass[]  or { get; set; }
+        public OrClass[] or { get; set; }
     }
 }

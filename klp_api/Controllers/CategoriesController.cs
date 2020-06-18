@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using klp_api.Controllers.CouchDBControllers;
+﻿using klp_api.Controllers.CouchDBControllers;
 using klp_api.Controllers.CouchDBResponseController;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 
 namespace klp_api.Controllers
@@ -19,9 +19,8 @@ namespace klp_api.Controllers
             CategoriesResponse Res = new CategoriesResponse();
             dynamic json = Res.RequestBody(code, name, limit, skip);
             var Request = await Req.RequestAsync(json);
-            var h = Res.ResponseBody(Request);
-            return new JsonResult(h);
-            
+            return new JsonResult(Res.ResponseBody(Request));
+
         }
     }
 }

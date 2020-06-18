@@ -1,4 +1,5 @@
 ﻿using klp_api.Models.Req;
+using klp_api.Models.Res.Products;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -42,6 +43,22 @@ namespace klp_api.Controllers.CouchDBControllers
                 fields = new List<string> { "code", "name" },
                 limit = (int)limit,
                 skip = (int)skip
+            };
+            dynamic json = JsonConvert.SerializeObject(jsonObject);
+            return json;
+        }
+
+        public ValidationProductCodeBodyReqModel RequestProductCodeBody(string code)
+        {
+            ValidationProductCodeBodyReqModel jsonObject = new ValidationProductCodeBodyReqModel
+            {
+                selector = new ProductsCodeReqBodyModel
+                {
+                    code = new ProductCodeClass
+                    {
+                        eq = code
+                    }
+                }
             };
             dynamic json = JsonConvert.SerializeObject(jsonObject);
             return json;

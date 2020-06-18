@@ -25,4 +25,9 @@ namespace klp_api.Models.Req
         [JsonProperty("$or")]
         public OrClass[] or { get; set; }
     }
+    //~/api/Products/:Code
+    public class ProductsCodeReqBodyModel
+    {
+    }
+
 }

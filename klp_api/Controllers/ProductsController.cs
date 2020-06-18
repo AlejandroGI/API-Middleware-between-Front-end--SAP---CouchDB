@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using klp_api.Controllers.CouchDBControllers;
+using klp_api.Controllers.CouchDBResponseController;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace klp_api.Controllers
 {
@@ -12,20 +10,17 @@ namespace klp_api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        // GET: api/<ProductsController>
-        //para buscar productos y recibir por query el texto a buscar, el limit y la pagina
+        // GET: api/<CategoriesController>
+        //para obtener la lista de categorias. aqui debieses entregar una lista con objetos asi:
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] string name, [FromQuery] int? limit, [FromQuery] int? skip)
         {
-            return new string[] { "Products" };
-        }
+            ProductsRequest Req = new ProductsRequest();
+            ProductsResponse Res = new ProductsResponse();
+            dynamic json = Res.RequestBody(code, name, limit, skip);
+            var Request = await Req.RequestAsync(json);
+            return new JsonResult(Res.ResponseBody(Request));
 
-        // GET api/<ProductsController>/5
-        //para obtener los datos de un producto por su codigo
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "Products";
         }
     }
 }

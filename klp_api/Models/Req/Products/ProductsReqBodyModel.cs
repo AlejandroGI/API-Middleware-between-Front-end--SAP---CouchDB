@@ -28,6 +28,12 @@ namespace klp_api.Models.Req
     //~/api/Products/:Code
     public class ProductsCodeReqBodyModel
     {
+        public ProductCodeClass code { get; set; }
+    }
+    public class ProductCodeClass
+    {
+        [JsonProperty("$eq")]
+        public string eq { get; set; }
     }
 
 }

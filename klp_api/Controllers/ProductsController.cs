@@ -17,10 +17,34 @@ namespace klp_api.Controllers
         {
             ProductsRequest Req = new ProductsRequest();
             ProductsResponse Res = new ProductsResponse();
-            dynamic json = Res.RequestBody(code, name, limit, skip);
-            var Request = await Req.RequestAsync(json);
-            return new JsonResult(Res.ResponseBody(Request));
-
+            dynamic json = Res.RequestProductsBody(code, name, limit, skip);
+            var Request = await Req.RequestProductsAsync(json, "products");
+            if (Request != null)
+            {
+                return new JsonResult(Res.ResponseProductsBody(Request[0], Request[1]));
+            }
+            else
+            {
+                return new JsonResult("error en petición a endpoint CouchDB y SAP");
+            }
+            
+        }
+        [HttpGet("{code}")]
+        public async Task<JsonResult> GetCode(string code)
+        {
+            ProductsRequest Req = new ProductsRequest();
+            ProductsResponse Res = new ProductsResponse();
+            dynamic json = Res.RequestProductsCodeBody(code);
+            var Request = await Req.RequestProductsAsync(json, "code");
+            if (Request != null)
+            {
+                return new JsonResult(Res.ResponseProductsCodeBody(Request[0], Request[1]));
+            }
+            else
+            {
+                return new JsonResult("error en petición a endpoint CouchDB y SAP");
+            }
+            
         }
     }
 }

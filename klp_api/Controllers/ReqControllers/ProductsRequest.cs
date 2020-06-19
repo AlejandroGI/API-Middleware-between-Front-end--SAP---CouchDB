@@ -9,7 +9,7 @@ namespace klp_api.Controllers.CouchDBControllers
 {
     public class ProductsRequest
     {
-        public dynamic RequestBody(string code, string name, int? limit, int? skip)
+        public dynamic RequestProductsBody(string code, string name, int? limit, int? skip)
         {
             if (code == null | name == null)
             {
@@ -48,8 +48,12 @@ namespace klp_api.Controllers.CouchDBControllers
             return json;
         }
 
-        public ValidationProductCodeBodyReqModel RequestProductCodeBody(string code)
+        public dynamic RequestProductsCodeBody(string code)
         {
+            if (code == null)
+            {
+                code = "";
+            }
             ValidationProductCodeBodyReqModel jsonObject = new ValidationProductCodeBodyReqModel
             {
                 selector = new ProductsCodeReqBodyModel
@@ -64,7 +68,7 @@ namespace klp_api.Controllers.CouchDBControllers
             return json;
         }
 
-        public async Task<dynamic> RequestAsync(dynamic json)   //Agregar endpoint y petición por SAP
+        public async Task<dynamic> RequestProductsAsync(dynamic json, string source)   //Agregar endpoint y petición por SAP
         {
             dynamic jsonOut;
             dynamic ResponseContent;
@@ -74,7 +78,12 @@ namespace klp_api.Controllers.CouchDBControllers
             {
                 var httpResponse = await httpClient.PostAsync("http://52.250.109.79:5984/products/_find", httpContent);
                 ResponseContent = await httpResponse.Content.ReadAsStringAsync();
-                jsonOut = JsonConvert.DeserializeObject<Models.Res.ProductsBodyResModel>(ResponseContent);
+                jsonOut = source switch
+                {
+                    "code" => JsonConvert.DeserializeObject<Models.Res.ProductsCodeBodyResModel>(ResponseContent),
+                    "products" => JsonConvert.DeserializeObject<Models.Res.ProductsBodyResModel>(ResponseContent),
+                    _ => null,
+                };
                 var StatusCode = (int)httpResponse.StatusCode;
             }
             return jsonOut;

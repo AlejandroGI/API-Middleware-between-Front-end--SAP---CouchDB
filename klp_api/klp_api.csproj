@@ -10,10 +10,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\SAPResponseController\" />
-    <Folder Include="Controllers\SAPRequestController\" />
-  </ItemGroup>
-
 
 </Project>

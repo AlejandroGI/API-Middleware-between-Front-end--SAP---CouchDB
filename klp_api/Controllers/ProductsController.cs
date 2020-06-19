@@ -21,7 +21,7 @@ namespace klp_api.Controllers
             var Request = await Req.RequestProductsAsync(json, "products");
             if (Request != null)
             {
-                return new JsonResult(Res.ResponseProductsBody(Request));
+                return new JsonResult(Res.ResponseProductsBody(Request[0], Request[1]));
             }
             else
             {
@@ -38,7 +38,7 @@ namespace klp_api.Controllers
             var Request = await Req.RequestProductsAsync(json, "code");
             if (Request != null)
             {
-                return new JsonResult(Res.ResponseProductsCodeBody(Request));
+                return new JsonResult(Res.ResponseProductsCodeBody(Request[0], Request[1]));
             }
             else
             {

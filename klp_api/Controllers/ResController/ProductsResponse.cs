@@ -6,22 +6,22 @@ namespace klp_api.Controllers.CouchDBResponseController
 {
     public class ProductsResponse : ProductsRequest
     {
-        public dynamic ResponseProductsBody(dynamic res)
+        public dynamic ResponseProductsBody(dynamic res, string dataSource)
         {
             ValidationBodyResModel jsonObject = new ValidationBodyResModel
             {
                 products = res.doc,
-                origin = "CouchDB"
+                origin = dataSource
             };
             return jsonObject;
         }
 
-        public dynamic ResponseProductsCodeBody (dynamic res)
+        public dynamic ResponseProductsCodeBody (dynamic res, string dataSource)
         {
             ValidationProductsCodeBodyResModel jsonObject = new ValidationProductsCodeBodyResModel
             {
                 products = res,
-                origin = "CouchDB"
+                origin = dataSource
             };
             return jsonObject;
         }

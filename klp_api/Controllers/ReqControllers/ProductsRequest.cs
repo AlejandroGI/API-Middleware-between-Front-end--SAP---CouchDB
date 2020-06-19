@@ -79,7 +79,7 @@ namespace klp_api.Controllers.CouchDBControllers
             StringContent httpContent = new StringContent(json, null, "application/json");
             using (HttpClient httpClient = new HttpClient())
             {
-                var httpResponseSAP = await httpClient.PostAsync("http://sap.examplesap", httpContent); //agregar endpoint de SAP a appsetings.
+                //var httpResponseSAP = await httpClient.PostAsync("http://sap.examplesap", httpContent); //agregar endpoint de SAP a appsetings.
                 var httpResponseCouchDB = await httpClient.PostAsync("http://52.250.109.79:5984/products/_find", httpContent); //agregar endpoint de CouchDB a appsetings.
                 httpResponse = httpResponseCouchDB;     //Validar origen de SAP o Coach cuando exista SAP
                 responseContent = await httpResponse.Content.ReadAsStringAsync();
@@ -91,7 +91,7 @@ namespace klp_api.Controllers.CouchDBControllers
                 };
                 statusCode = (int)httpResponse.StatusCode;
                 JsonAndStatusCode.Add(jsonOut);
-                JsonAndStatusCode.Add(statusCode);
+                JsonAndStatusCode.Add("CouchDB");       //Modificar el origen de datos
             }
             return JsonAndStatusCode;
         }

@@ -27,7 +27,3 @@ namespace klp_api.Controllers.CouchDBResponseController
         }
     }
 }
-
-
-
-

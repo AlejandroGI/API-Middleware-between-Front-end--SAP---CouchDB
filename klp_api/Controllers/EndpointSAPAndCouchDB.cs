@@ -22,7 +22,7 @@ namespace klp_api.Controllers
             using (HttpClient httpClient = new HttpClient())
             {
                 //var httpResponseSAP = await httpClient.PostAsync("http://sap.examplesap", httpContent); //agregar endpoint de SAP a appsetings.
-                var httpResponseCouchDB = await httpClient.PostAsync("http://52.250.109.79:5984/stock/_find", httpContent); //agregar endpoint de CouchDB a appsetings.
+                var httpResponseCouchDB = await httpClient.PostAsync("http://52.250.109.79:5984/prices/_find", httpContent); //agregar endpoint de CouchDB a appsetings.
                 httpResponse = httpResponseCouchDB;     //Validar origen de SAP o Coach cuando exista SAP
                 responseContent = await httpResponse.Content.ReadAsStringAsync();
                 jsonOut = source switch

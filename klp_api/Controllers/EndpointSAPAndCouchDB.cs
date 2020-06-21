@@ -1,4 +1,5 @@
 ﻿using klp_api.Models.Res;
+using klp_api.Models.Res.Categories;
 using klp_api.Models.Res.Prices;
 using klp_api.Models.Res.Stock;
 using Newtonsoft.Json;
@@ -22,7 +23,7 @@ namespace klp_api.Controllers
             using (HttpClient httpClient = new HttpClient())
             {
                 //var httpResponseSAP = await httpClient.PostAsync("http://sap.examplesap", httpContent); //agregar endpoint de SAP a appsetings.
-                var httpResponseCouchDB = await httpClient.PostAsync("http://52.250.109.79:5984/prices/_find", httpContent); //agregar endpoint de CouchDB a appsetings.
+                var httpResponseCouchDB = await httpClient.PostAsync("http://52.250.109.79:5984/products/_find", httpContent); //agregar endpoint de CouchDB a appsetings.
                 httpResponse = httpResponseCouchDB;     //Validar origen de SAP o Coach cuando exista SAP
                 responseContent = await httpResponse.Content.ReadAsStringAsync();
                 jsonOut = source switch
@@ -31,6 +32,7 @@ namespace klp_api.Controllers
                     "products" => JsonConvert.DeserializeObject<ProductsBodyResModel>(responseContent),
                     "pricesProduct" => JsonConvert.DeserializeObject<PricesProductResBodyModel>(responseContent),
                     "stock" => JsonConvert.DeserializeObject<StockProductResBodyModel>(responseContent),
+                    "category" => JsonConvert.DeserializeObject<CategoriesProductCodeReqsBodyModel>(responseContent),
                     _ => null,
                 };
                 statusCode = (int)httpResponse.StatusCode;

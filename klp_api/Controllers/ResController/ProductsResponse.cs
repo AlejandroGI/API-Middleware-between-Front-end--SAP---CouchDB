@@ -8,7 +8,7 @@ namespace klp_api.Controllers.CouchDBResponseController
     {
         public dynamic ResponseProductsBody(dynamic res, string dataSource)
         {
-            ValidationBodyResModel jsonObject = new ValidationBodyResModel
+            ValidationProductsBodyResModel jsonObject = new ValidationProductsBodyResModel
             {
                 products = res.doc,
                 origin = dataSource
@@ -27,7 +27,3 @@ namespace klp_api.Controllers.CouchDBResponseController
         }
     }
 }
-
-
-
-

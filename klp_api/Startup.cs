@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace klp_api
 {
@@ -23,7 +24,18 @@ namespace klp_api
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API Middleware between KLP Web & CouchDB", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "API Middleware between KLP Web & CouchDB",
+                    Description = "API Middleware between KLP Web & CouchDB",
+                    TermsOfService = new Uri("http://hitch.cl/"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Alejandro Gutiérrez",
+                        Email = "agutierrez@itinnovation.cl",
+                    },
+                });
             });
         }
 

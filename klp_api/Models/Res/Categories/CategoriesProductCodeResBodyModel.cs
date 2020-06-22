@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace klp_api.Models.Res.Categories
 {
-    public class CategoriesProductCodeReqsBodyModel
+    public class CategoriesProductCodeResBodyModel
     {
         public DocsClass[] docs { get; set; }
     }

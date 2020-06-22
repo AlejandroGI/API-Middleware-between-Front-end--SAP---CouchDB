@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace klp_api.Models.Res.Categories
 {
-    public class ValidationCategoriesProductCodeReqsBodyModel
+    public class ValidationCategoriesResBodyModel
     {
-        public CategoriesProductCodeResBodyModel[] categories { get; set; }
+        public CategoriesResBodyModel[] categories { get; set; }
         public string origin { get; set; }
     }
 }

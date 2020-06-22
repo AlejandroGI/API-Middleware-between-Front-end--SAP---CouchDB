@@ -8,9 +8,9 @@ namespace klp_api.Controllers.ResController
         {
             ValidationCategoriesProductCodeReqsBodyModel jsonObject = new ValidationCategoriesProductCodeReqsBodyModel
             {
-                categories = new CategoriesProductCodeReqsBodyModel[]
+                categories = new CategoriesProductCodeResBodyModel[]
                 {
-                    new CategoriesProductCodeReqsBodyModel
+                    new CategoriesProductCodeResBodyModel
                     {
                         docs = res.docs
                     }

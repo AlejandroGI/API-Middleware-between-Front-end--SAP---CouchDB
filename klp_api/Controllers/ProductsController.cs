@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace klp_api.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -30,6 +31,7 @@ namespace klp_api.Controllers
                 return new JsonResult("error en petición a endpoint CouchDB y SAP");
             }
         }
+
 
         [HttpGet("{code}")]
         public async Task<JsonResult> GetCode(string code)

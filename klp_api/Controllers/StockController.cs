@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace klp_api.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class StockController : ControllerBase

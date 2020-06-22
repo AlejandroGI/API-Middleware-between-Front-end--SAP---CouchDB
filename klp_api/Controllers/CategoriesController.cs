@@ -14,7 +14,10 @@ namespace klp_api.Controllers
         private readonly CategoriesRequest Req = new CategoriesRequest();
         private readonly CategoriesResponse Res = new CategoriesResponse();
         private readonly EndpointSAPAndCouchDB Endpoint = new EndpointSAPAndCouchDB();
-        // GET: api/<CategoriesController>
+        /// <summary>
+        /// Buscar productos por código
+        /// </summary>
+        /// <param código="code"></param> 
         [HttpGet("{code}")]
         public async Task<JsonResult> GetAsyncCode(int code, [FromQuery] int? limit, [FromQuery] int? skip)
         {
@@ -31,6 +34,9 @@ namespace klp_api.Controllers
         }
 
         [Route("api/[controller]")]
+        /// <summary>
+        /// enlistar los primeros 10 productos
+        /// </summary>
         // GET api/<CategoriesController>/5
         [HttpGet()]
         public async Task<JsonResult> GetAsync()

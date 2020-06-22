@@ -8,7 +8,14 @@ namespace klp_api.Controllers.ResController
         {
             ValidationPricesProductResBodyModel jsonObject = new ValidationPricesProductResBodyModel
             {
-                prices = res.docs,
+                
+                prices = new PricesProductResBodyModel[]
+                {
+                    new PricesProductResBodyModel
+                    {
+                        docs = res.docs
+                    }
+                },
                 origin = dataSource
             };
             return jsonObject;

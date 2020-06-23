@@ -7,6 +7,7 @@ namespace klp_api.Models.Res.Products
 {
     public class ValidationProductsCodeBodyResModel
     {
+        public string rut { get; set; }
         public ProductsCodeBodyResModel products { get; set; }
         public string origin { get; set; }
     }

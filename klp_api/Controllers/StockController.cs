@@ -22,13 +22,13 @@ namespace klp_api.Controllers
         /// </summary>
         /// <param código="code"></param> 
         [HttpGet("{code}")]
-        public async Task<JsonResult> GetAsync(string code)
+        public async Task<JsonResult> GetAsync(string code, [FromQuery] string rut)
         {
             dynamic json = Req.RequestStockBody(code);
             var Request = await Endpoint.RequestProductsAsync(json, "stock");
             if (Request != null)
             {
-                return new JsonResult(Res.StockProductsBody(Request[0], Request[1]));
+                return new JsonResult(Res.StockProductsBody(Request[0], Request[1], rut));
             }
             else
             {

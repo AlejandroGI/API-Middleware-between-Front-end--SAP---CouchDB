@@ -19,13 +19,13 @@ namespace klp_api.Controllers
         /// </summary>
         /// <param código="code"></param> 
         [HttpGet("{code}")]
-        public async Task<JsonResult> GetAsyncCode(int code, [FromQuery] int? limit, [FromQuery] int? skip)
+        public async Task<JsonResult> GetAsyncCode(int code, [FromQuery] int? limit, [FromQuery] int? skip, [FromQuery] string rut)
         {
             dynamic json = Req.RequestCategoriesBody(code, limit, skip);
             var Request = await Endpoint.RequestProductsAsync(json, "categoryCode");
             if (Request != null)
             {
-                return new JsonResult(Res.CategoriesBody(Request[0], Request[1]));
+                return new JsonResult(Res.CategoriesBody(Request[0], Request[1], rut));
             }
             else
             {
@@ -39,12 +39,12 @@ namespace klp_api.Controllers
         /// </summary>
         // GET api/<CategoriesController>/5
         [HttpGet()]
-        public async Task<JsonResult> GetAsync()
+        public async Task<JsonResult> GetAsync([FromQuery] string rut)
         {
             var Request = await Endpoint.RequestProductsAsync(null, "category");
             if (Request != null)
             {
-                return new JsonResult(Res.CategoriesBody(Request[0], Request[1]));
+                return new JsonResult(Res.CategoriesBody(Request[0], Request[1], rut));
             }
             else
             {

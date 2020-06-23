@@ -65,6 +65,10 @@ namespace klp_api.Controllers
                     "category" => JsonConvert.DeserializeObject<CategoriesProductCodeResBodyModel>(responseContent),
                     _ => null,
                 };
+                if (jsonOut.bookmark == "nil")
+                {
+                    jsonOut = null;
+                }
                 statusCode = (int)httpResponse.StatusCode;
                 JsonAndStatusCode.Add(jsonOut);
                 JsonAndStatusCode.Add("CouchDB");       //Modificar el origen de datos

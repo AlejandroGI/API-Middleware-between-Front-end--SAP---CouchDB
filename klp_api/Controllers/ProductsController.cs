@@ -22,10 +22,10 @@ namespace klp_api.Controllers
         /// <param código="code"></param> 
         /// <param nombre="name"></param> 
         [HttpGet]
-        public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] string name, [FromQuery] int? limit, [FromQuery] int? skip)
+        public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] string name, [FromQuery] int? limit, [FromQuery] int? skip, [FromQuery] string rut)
        {
 
-            dynamic json = _Res.RequestProductsBody(code, name, limit, skip);
+            dynamic json = _Res.RequestProductsBody(code, name, limit, skip, rut);
             var Request = await _Endpoint.RequestProductsAsync(json, "products");
             if (Request != null)
             {
@@ -43,9 +43,9 @@ namespace klp_api.Controllers
         /// </summary>
         /// <param código="code"></param> 
         [HttpGet("{code}")]
-        public async Task<JsonResult> GetCodeAsync(string code)
+        public async Task<JsonResult> GetCodeAsync(string code, [FromQuery] string rut)
         {
-            dynamic json = _Res.RequestProductsCodeBody(code);
+            dynamic json = _Res.RequestProductsCodeBody(code, rut);
             var Request = await _Endpoint.RequestProductsAsync(json, "code");
             if (Request != null)
             {

@@ -16,9 +16,14 @@ namespace klp_api.Controllers
         private readonly EndpointSAPAndCouchDB _Endpoint = new EndpointSAPAndCouchDB();
 
         //para obtener la lista de categorias
+        /// <summary>
+        /// Obtener la lista de categorias por su nombre o código. limit y skip son para paginar resultados, si no se piden por defecto serán los 10 primeros resultados
+        /// </summary>
+        /// <param código="code"></param> 
+        /// <param nombre="name"></param> 
         [HttpGet]
         public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] string name, [FromQuery] int? limit, [FromQuery] int? skip)
-        {
+       {
 
             dynamic json = _Res.RequestProductsBody(code, name, limit, skip);
             var Request = await _Endpoint.RequestProductsAsync(json, "products");
@@ -33,6 +38,10 @@ namespace klp_api.Controllers
         }
 
         //Obtener datos de producto por código
+        /// <summary>
+        /// Obtener la lista de categorias por código, devolviendo los primeros 10 resultados
+        /// </summary>
+        /// <param código="code"></param> 
         [HttpGet("{code}")]
         public async Task<JsonResult> GetCodeAsync(string code)
         {

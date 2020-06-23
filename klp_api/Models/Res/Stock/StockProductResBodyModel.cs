@@ -5,6 +5,7 @@ namespace klp_api.Models.Res.Stock
     public class StockProductResBodyModel
     {
         public DocsStock[] docs { get; set; }
+        public string bookmark { get; set; }
     }
     public class DocsStock
     {

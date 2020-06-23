@@ -6,6 +6,7 @@ namespace klp_api.Models.Res
     {
         [JsonProperty("docs")]
         public Docs[] doc { get; set; }
+        public string bookmark { get; set; }
     }
     public class Docs
     {
@@ -17,6 +18,7 @@ namespace klp_api.Models.Res
     {
         [JsonProperty("docs")]
         public DocsCode[] docs { get; set; }
+        public string bookmark { get; set; }
     }
     public class DocsCode
     {

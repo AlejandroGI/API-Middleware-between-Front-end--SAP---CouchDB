@@ -9,9 +9,12 @@ namespace klp_api.Controllers.CouchDBControllers
     {
         public dynamic RequestProductsBody(string code, string name, int? limit, int? skip)
         {
-            if (code == null | name == null)
+            if (code == null)
             {
                 code = "";
+            }
+            if (name == null)
+            {
                 name = "";
             }
             if (limit == null | skip == null)

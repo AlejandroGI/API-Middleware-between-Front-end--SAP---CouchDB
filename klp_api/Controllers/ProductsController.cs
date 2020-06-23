@@ -11,20 +11,25 @@ namespace klp_api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ProductsRequest Req = new ProductsRequest();
-        private readonly ProductsResponse Res = new ProductsResponse();
-        private readonly EndpointSAPAndCouchDB Endpoint = new EndpointSAPAndCouchDB();
-        // GET: api/<CategoriesController>
-        //para obtener la lista de categorias. aqui debieses entregar una lista con objetos asi:
+        private readonly ProductsRequest _Req = new ProductsRequest();
+        private readonly ProductsResponse _Res = new ProductsResponse();
+        private readonly EndpointSAPAndCouchDB _Endpoint = new EndpointSAPAndCouchDB();
+
+        //para obtener la lista de categorias
+        /// <summary>
+        /// Obtener la lista de categorias por su nombre o código. limit y skip son para paginar resultados, si no se piden por defecto serán los 10 primeros resultados
+        /// </summary>
+        /// <param código="code"></param> 
+        /// <param nombre="name"></param> 
         [HttpGet]
         public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] string name, [FromQuery] int? limit, [FromQuery] int? skip)
-        {
+       {
 
-            dynamic json = Res.RequestProductsBody(code, name, limit, skip);
-            var Request = await Endpoint.RequestProductsAsync(json, "products");
+            dynamic json = _Res.RequestProductsBody(code, name, limit, skip);
+            var Request = await _Endpoint.RequestProductsAsync(json, "products");
             if (Request != null)
             {
-                return new JsonResult(Res.ResponseProductsBody(Request[0], Request[1]));
+                return new JsonResult(_Res.ResponseProductsBody(Request[0], Request[1]));
             }
             else
             {
@@ -32,15 +37,19 @@ namespace klp_api.Controllers
             }
         }
 
-
+        //Obtener datos de producto por código
+        /// <summary>
+        /// Obtener la lista de categorias por código, devolviendo los primeros 10 resultados
+        /// </summary>
+        /// <param código="code"></param> 
         [HttpGet("{code}")]
-        public async Task<JsonResult> GetCode(string code)
+        public async Task<JsonResult> GetCodeAsync(string code)
         {
-            dynamic json = Res.RequestProductsCodeBody(code);
-            var Request = await Endpoint.RequestProductsAsync(json, "code");
+            dynamic json = _Res.RequestProductsCodeBody(code);
+            var Request = await _Endpoint.RequestProductsAsync(json, "code");
             if (Request != null)
             {
-                return new JsonResult(Res.ResponseProductsCodeBody(Request[0], Request[1]));
+                return new JsonResult(_Res.ResponseProductsCodeBody(Request[0], Request[1]));
             }
             else
             {

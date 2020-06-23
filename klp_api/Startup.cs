@@ -60,7 +60,7 @@ namespace klp_api
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Middleware between KLP Web & CouchDB");
             });
 
             app.UseRouting();

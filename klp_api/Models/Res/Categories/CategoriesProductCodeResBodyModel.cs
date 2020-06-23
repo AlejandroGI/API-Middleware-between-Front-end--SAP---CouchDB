@@ -9,6 +9,7 @@ namespace klp_api.Models.Res.Categories
     public class CategoriesProductCodeResBodyModel
     {
         public DocsClass[] docs { get; set; }
+        public string bookmark { get; set; }
     }
     public class DocsClass
     {

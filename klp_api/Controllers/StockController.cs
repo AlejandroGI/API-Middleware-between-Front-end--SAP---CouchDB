@@ -17,6 +17,10 @@ namespace klp_api.Controllers
         private readonly EndpointSAPAndCouchDB Endpoint = new EndpointSAPAndCouchDB();
         // GET api/<StockController>/5
         //para obtener el stock de un producto, siendo :product el codigo del producto
+        /// <summary>
+        /// Obtener el stock de un producto por su código
+        /// </summary>
+        /// <param código="code"></param> 
         [HttpGet("{code}")]
         public async Task<JsonResult> GetAsync(string code)
         {

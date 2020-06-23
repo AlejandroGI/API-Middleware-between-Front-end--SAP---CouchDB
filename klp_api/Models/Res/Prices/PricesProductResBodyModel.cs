@@ -5,6 +5,7 @@ namespace klp_api.Models.Res.Prices
     public class PricesProductResBodyModel
     {
         public DocsPrices[] docs { get; set; }
+        public string bookmark { get; set; }
     }
     public class DocsPrices
     {

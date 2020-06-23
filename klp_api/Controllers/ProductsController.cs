@@ -20,12 +20,11 @@ namespace klp_api.Controllers
         /// Obtener la lista de categorias por su nombre o código. limit y skip son para paginar resultados, si no se piden por defecto serán los 10 primeros resultados
         /// </summary>
         /// <param código="code"></param> 
-        /// <param nombre="name"></param> 
         [HttpGet]
-        public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] string name, [FromQuery] int? limit, [FromQuery] int? skip, [FromQuery] string rut)
+        public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] int? limit, [FromQuery] int? skip, [FromQuery] string rut)
        {
 
-            dynamic json = _Res.RequestProductsBody(code, name, limit, skip);
+            dynamic json = _Res.RequestProductsBody(code, limit, skip);
             var Request = await _Endpoint.RequestProductsAsync(json, "products");
             if (Request != null)
             {

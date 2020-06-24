@@ -7,15 +7,11 @@ namespace klp_api.Controllers.CouchDBControllers
 {
     public class ProductsRequest
     {
-        public dynamic RequestProductsBody(string code, string name, int? limit, int? skip)
+        public dynamic RequestProductsBody(string code , int? limit, int? skip)
         {
             if (code == null)
             {
                 code = "";
-            }
-            if (name == null)
-            {
-                name = "";
             }
             if (limit == null | skip == null)
             {
@@ -36,12 +32,12 @@ namespace klp_api.Controllers.CouchDBControllers
                         {
                             name = new NameClass
                             {
-                                regex = name
+                                regex = code
                             }
                         }
                     }
                 },
-                fields = new List<string> { "code", "name" },
+                fields = new List<string> { "code", "name", "rut" },
                 limit = (int)limit,
                 skip = (int)skip
             };

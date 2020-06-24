@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace klp_api.Models.Req.Products
 {
+    //~/api/products
     public class ValidationProductsReqBodyModel
     {
         [JsonProperty("selector")]
@@ -16,5 +13,11 @@ namespace klp_api.Models.Req.Products
         public int? Limit { get; set; }
         [JsonProperty("skip")]
         public int? Skip { get; set; }
+    }
+    //~/api/products/:code
+    public class ValidationProductsCodeReqBodyModel
+    {
+        [JsonProperty("selector")]
+        public ProductsCodeModel Selector { get; set; }
     }
 }

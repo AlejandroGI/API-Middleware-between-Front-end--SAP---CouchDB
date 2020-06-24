@@ -11,31 +11,52 @@ namespace klp_api.Models.Req
         public AndClass[] And { get; set; }
 
     }
-    public class OrClass
+        public class OrClass
+        {
+            [JsonProperty("code")]
+            public CodeClass Code { get; set; }
+            [JsonProperty("name")]
+            public NameClass Name { get; set; }
+        }
+            public class CodeClass
+            {
+                [JsonProperty("$regex")]
+                public string Regex { get; set; }
+            }
+            public class NameClass
+            {
+                [JsonProperty("$regex")]
+                public string Regex { get; set; }
+            }
+
+        public class AndClass
+        {
+            [JsonProperty("rut")]
+            public RutClass Rut { get; set; }
+        }
+            public class RutClass
+            {
+                [JsonProperty("$eq")]
+                public string Eq { get; set; }
+            }
+    /*----------------------------------------------------------*/
+
+    public class ProductsCodeModel
     {
         [JsonProperty("code")]
-        public CodeClass Code { get; set; }
-        [JsonProperty("name")]
-        public NameClass Name { get; set; }
-    }
-    public class NameClass
-    {
-        [JsonProperty("$regex")]
-        public string Regex { get; set; }
-    }
-    public class CodeClass
-    {
-        [JsonProperty("$regex")]
-        public string Regex { get; set; }
-    }
-    public class AndClass
-    {
+        public Code Code { get; set; }
         [JsonProperty("rut")]
-        public RutClass Rut { get; set; }
+        public Rut Rut { get; set; }
     }
-    public class RutClass
-    {
-        [JsonProperty("$eq")]
-        public string Eq { get; set; }
-    }
+        
+        public class Code
+        {
+            [JsonProperty("$eq")]
+            public string Eq { get; set; }
+        }
+        public class Rut
+        {
+            [JsonProperty("$eq")]
+            public string Eq { get; set; }
+        }
 }

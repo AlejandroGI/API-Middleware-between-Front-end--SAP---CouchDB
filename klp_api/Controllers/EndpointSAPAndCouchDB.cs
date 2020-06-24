@@ -1,7 +1,5 @@
 ﻿using klp_api.Models.Res;
 using klp_api.Models.Res.Categories;
-using klp_api.Models.Res.Prices;
-using klp_api.Models.Res.Stock;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -59,8 +57,6 @@ namespace klp_api.Controllers
                 {
                     "code" => JsonConvert.DeserializeObject<ProductsCodeBodyResModel>(responseContent),
                     "products" => JsonConvert.DeserializeObject<ProductsBodyResModel>(responseContent),
-                    "pricesProduct" => JsonConvert.DeserializeObject<PricesProductResBodyModel>(responseContent),
-                    "stock" => JsonConvert.DeserializeObject<StockProductResBodyModel>(responseContent),
                     "categoryCode" => JsonConvert.DeserializeObject<CategoriesProductCodeResBodyModel>(responseContent),
                     "category" => JsonConvert.DeserializeObject<CategoriesProductCodeResBodyModel>(responseContent),
                     _ => null,

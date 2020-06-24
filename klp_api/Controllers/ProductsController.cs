@@ -22,7 +22,7 @@ namespace klp_api.Controllers
         /// <param código="code"></param> 
         [HttpGet]
         public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] int? limit, [FromQuery] int? skip, [FromQuery] string rut)
-       {
+        {
 
             dynamic json = _Res.RequestProductsBody(code, limit, skip);
             var Request = await _Endpoint.RequestProductsAsync(json, "products");

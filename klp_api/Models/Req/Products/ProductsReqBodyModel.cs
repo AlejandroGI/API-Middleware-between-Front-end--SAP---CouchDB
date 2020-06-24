@@ -1,39 +1,41 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿//Clase modelo de estructura Object
+using Newtonsoft.Json;
 
-//Clase modelo de estructura Object
 namespace klp_api.Models.Req
 {
-
-    public class CodeClass
+    public class ProductReqModel
     {
-        [JsonProperty("$regex")]
-        public string regex { get; set; }
+        [JsonProperty("$or")]
+        public OrClass[] Or { get; set; }
+        [JsonProperty("$and")]
+        public AndClass[] And { get; set; }
+
     }
     public class OrClass
     {
-        public NameClass name { get; set; }
+        [JsonProperty("code")]
+        public CodeClass Code { get; set; }
+        [JsonProperty("name")]
+        public NameClass Name { get; set; }
     }
     public class NameClass
     {
         [JsonProperty("$regex")]
-        public string regex { get; set; }
+        public string Regex { get; set; }
     }
-    public class ProductsReqBodyModel
+    public class CodeClass
     {
-        public CodeClass code { get; set; }
-        [JsonProperty("$or")]
-        public OrClass[] or { get; set; }
+        [JsonProperty("$regex")]
+        public string Regex { get; set; }
     }
-    //~/api/Products/:Code
-    public class ProductsCodeReqBodyModel
+    public class AndClass
     {
-        public ProductCodeClass code { get; set; }
+        [JsonProperty("rut")]
+        public RutClass Rut { get; set; }
     }
-    public class ProductCodeClass
+    public class RutClass
     {
         [JsonProperty("$eq")]
-        public string eq { get; set; }
+        public string Eq { get; set; }
     }
-
 }

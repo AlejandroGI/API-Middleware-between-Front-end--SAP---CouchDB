@@ -1,13 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 
-namespace klp_api.Models.Req
+namespace klp_api.Models.Req.Products
 {
-    //Clase validación para estructura de Json
+    //~/api/products
     public class ValidationProductsReqBodyModel
     {
-        public ProductsReqBodyModel selector { get; set; }
-        public List<string> fields { get; set; }
-        public int limit { get; set; }
-        public int skip { get; set; }
+        [JsonProperty("selector")]
+        public ProductReqModel Selector { get; set; }
+        [JsonProperty("fields")]
+        public string[] Fields { get; set; }
+        [JsonProperty("limit")]
+        public int? Limit { get; set; }
+        [JsonProperty("skip")]
+        public int? Skip { get; set; }
+    }
+    //~/api/products/:code
+    public class ValidationProductsCodeReqBodyModel
+    {
+        [JsonProperty("selector")]
+        public ProductsCodeModel Selector { get; set; }
     }
 }

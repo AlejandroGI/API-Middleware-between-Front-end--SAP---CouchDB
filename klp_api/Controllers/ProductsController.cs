@@ -21,10 +21,10 @@ namespace klp_api.Controllers
         /// </summary>
         /// <param código="code"></param> 
         [HttpGet]
-        public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] int? limit, [FromQuery] int? skip, [FromQuery] string rut)
+        public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] string name, [FromQuery] int? limit, [FromQuery] int? skip, [FromQuery] string rut)
         {
 
-            dynamic json = _Res.RequestProductsBody(code, limit, skip);
+            dynamic json = _Res.RequestProductsBody(code, name, limit, skip, rut);
             var Request = await _Endpoint.RequestProductsAsync(json, "products");
             if (Request != null)
             {
@@ -41,19 +41,19 @@ namespace klp_api.Controllers
         /// Obtener la lista de categorias por código, devolviendo los primeros 10 resultados
         /// </summary>
         /// <param código="code"></param> 
-        [HttpGet("{code}")]
-        public async Task<JsonResult> GetCodeAsync(string code, [FromQuery] string rut)
-        {
-            dynamic json = _Res.RequestProductsCodeBody(code);
-            var Request = await _Endpoint.RequestProductsAsync(json, "code");
-            if (Request != null)
-            {
-                return new JsonResult(_Res.ResponseProductsCodeBody(Request[0], Request[1], rut));
-            }
-            else
-            {
-                return new JsonResult("error en petición a endpoint CouchDB y SAP");
-            }
-        }
+        //[HttpGet("{code}")]
+        //public async Task<JsonResult> GetCodeAsync(string code, [FromQuery] string rut)
+        //{
+        //    dynamic json = _Res.RequestProductsCodeBody(code);
+        //    var Request = await _Endpoint.RequestProductsAsync(json, "products");
+        //    if (Request != null)
+        //    {
+        //        return new JsonResult(_Res.ResponseProductsCodeBody(Request[0], Request[1], rut));
+        //    }
+        //    else
+        //    {
+        //        return new JsonResult("error en petición a endpoint CouchDB y SAP");
+        //    }
+        //}
     }
 }

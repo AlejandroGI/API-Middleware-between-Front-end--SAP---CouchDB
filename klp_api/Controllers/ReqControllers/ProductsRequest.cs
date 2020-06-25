@@ -6,8 +6,11 @@ namespace klp_api.Controllers.CouchDBControllers
     public class ProductsRequest
     {
         private ValidationProductsReqBodyModel _jsonObject;
+        private ValidationProductsCodeReqBodyModel _jsonObjectCode;
+
         public dynamic RequestProductsBody(string code, string name, int? limit, int? skip, string rut)
         {
+
             if (name == null)
             {
                 name = "";
@@ -42,7 +45,7 @@ namespace klp_api.Controllers.CouchDBControllers
                             }
                         }
                     },
-                    Fields = new string[] { "code","name","stock" },
+                    Fields = new string[] { "code", "name", "stock" },
                     Limit = limit,
                     Skip = skip
                 };
@@ -83,19 +86,49 @@ namespace klp_api.Controllers.CouchDBControllers
                     Skip = skip
                 };
             }
-            dynamic json = JsonConvert.SerializeObject(_jsonObject);
+            dynamic json = JsonConvert.SerializeObject(_jsonObject, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             return json;
         }
 
-        //public dynamic RequestProductsCodeBody(string code)
-        //{
-        //    if (code == null)
-        //    {
-        //        code = "";
-        //    }
+        public dynamic RequestProductsCodeBody(string code, string rut)
+        {
+            if (code == null)
+            {
+                code = "";
+            }
+            if (rut == null | rut == "")
+            {
+                _jsonObjectCode = new ValidationProductsCodeReqBodyModel
+                {
+                    Selector = new Models.Req.ProductsCodeModel
+                    {
+                        Code = new Models.Req.Code
+                        {
+                            Eq = code
+                        },
+                    }
+                };
+            }
+            else
+            {
+                _jsonObjectCode = new ValidationProductsCodeReqBodyModel
+                {
+                    Selector = new Models.Req.ProductsCodeModel
+                    {
+                        Code = new Models.Req.Code
+                        {
+                            Eq = code
+                        },
+                        Rut = new Models.Req.Rut
+                        {
+                            Eq = rut
+                        }
+                    }
+                };
 
-        //    dynamic json = JsonConvert.SerializeObject(jsonObject);
-        //    return json;
-        //}
+            }
+            dynamic json = JsonConvert.SerializeObject(_jsonObjectCode, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            return json;
+        }
     }
 }

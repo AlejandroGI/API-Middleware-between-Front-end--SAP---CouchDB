@@ -1,6 +1,7 @@
 ﻿using klp_api.Controllers.CouchDBControllers;
 using klp_api.Controllers.CouchDBResponseController;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 
@@ -41,19 +42,19 @@ namespace klp_api.Controllers
         /// Obtener la lista de categorias por código, devolviendo los primeros 10 resultados
         /// </summary>
         /// <param código="code"></param> 
-        //[HttpGet("{code}")]
-        //public async Task<JsonResult> GetCodeAsync(string code, [FromQuery] string rut)
-        //{
-        //    dynamic json = _Res.RequestProductsCodeBody(code);
-        //    var Request = await _Endpoint.RequestProductsAsync(json, "products");
-        //    if (Request != null)
-        //    {
-        //        return new JsonResult(_Res.ResponseProductsCodeBody(Request[0], Request[1], rut));
-        //    }
-        //    else
-        //    {
-        //        return new JsonResult("error en petición a endpoint CouchDB y SAP");
-        //    }
-        //}
+        [HttpGet("{code}")]
+        public async Task<JsonResult> GetCodeAsync(string code, [FromQuery] string rut)
+        {
+            dynamic json = _Res.RequestProductsCodeBody(code, rut);
+            var Request = await _Endpoint.RequestProductsAsync(json, "productsCode");
+            if (Request != null)
+            {
+                return new JsonResult(_Res.ResponseProductsCodeBody(Request[0], Request[1], rut));
+            }
+            else
+            {
+                return new JsonResult("error en petición a endpoint CouchDB y SAP");
+            }
+        }
     }
 }

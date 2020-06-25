@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace klp_api.Models.Res.Products
 {
@@ -32,7 +29,7 @@ namespace klp_api.Models.Res.Products
         [JsonProperty("groupCode")]
         public int GroupCode { get; set; }
         [JsonProperty("equality")]
-        public int Equality { get; set; }
+        public float Equality { get; set; }
         [JsonProperty("dc")]
         public string Dc { get; set; }
         [JsonProperty("unit")]
@@ -46,9 +43,9 @@ namespace klp_api.Models.Res.Products
         [JsonProperty("equalityFormat")]
         public string EqualityFormat { get; set; }
         [JsonProperty("weightBox")]
-        public int WeightBox { get; set; }
+        public float WeightBox { get; set; }
         [JsonProperty("boxPallet")]
-        public int BoxPallet { get; set; }
+        public float BoxPallet { get; set; }
         [JsonProperty("termination")]
         public string Termination { get; set; }
         [JsonProperty("serie")]
@@ -80,9 +77,9 @@ namespace klp_api.Models.Res.Products
         [JsonProperty("isKit")]
         public int IsKit { get; set; }
         [JsonProperty("stockProvider")]
-        public bool StockProvider { get; set; }
+        public string StockProvider { get; set; }
         [JsonProperty("minSale")]
-        public bool MinSale { get; set; }
+        public string MinSale { get; set; }
         [JsonProperty("rut")]
         public string Rut { get; set; }
     }

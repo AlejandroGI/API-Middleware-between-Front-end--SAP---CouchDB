@@ -15,21 +15,12 @@ namespace klp_api.Controllers
             dynamic statusCode;
             string dataSource;
             dynamic httpResponse;
-            string endpoint = null;
+            string endpoint = "http://142.93.60.130:5984/products/_find";
             dynamic httpResponseCouchDB;
             List<dynamic> JsonAndStatusCode = new List<dynamic>();
             StringContent httpContent = new StringContent(json, null, "application/json");
             using (HttpClient httpClient = new HttpClient())
             {
-                switch (source)
-                {
-                    case "products":
-                        endpoint = "http://142.93.60.130:5984/products/_find ";
-                        break;
-                    case "productsCode":
-                        endpoint = "http://142.93.60.130:5984/products/_find ";
-                        break;
-                }
                 httpResponseCouchDB = await httpClient.PostAsync(endpoint, httpContent);
                 httpResponse = httpResponseCouchDB;     //Validar origen de SAP o Coach cuando exista SAP
                 responseContent = await httpResponse.Content.ReadAsStringAsync();
@@ -37,6 +28,7 @@ namespace klp_api.Controllers
                 {
                     "products" => JsonConvert.DeserializeObject<ValidationProductsResBodyModel>(responseContent),
                     "productsCode" => JsonConvert.DeserializeObject<EndpointValidationProductsCodeResBodyModel>(responseContent),
+                    "category" => JsonConvert.DeserializeObject(responseContent),
                     _ => null,
                 };
                 //if (jsonOut.Bookmark == "nil")

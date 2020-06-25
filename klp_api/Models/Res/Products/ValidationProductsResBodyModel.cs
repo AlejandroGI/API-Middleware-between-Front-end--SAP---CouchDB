@@ -7,8 +7,10 @@ namespace klp_api.Models.Res.Products
     {
         [JsonProperty("rut")]
         public string Rut { get; set; }
-        [JsonProperty("rut")]
-        public ProductsResBodyModel[] docs { get; set; }
+        [JsonProperty("docs")]
+        public ProductsResBodyModel[] Docs { get; set; }
+        [JsonProperty("origin")]
+        public string Origin { get; set; }
         [JsonProperty("bookmark")]
         public string Bookmark { get; set; }
     }
@@ -20,6 +22,8 @@ namespace klp_api.Models.Res.Products
         public string Rut { get; set; }
         [JsonProperty("docs")]
         public ProductsCodeResBodyModel[] Docs { get; set; }
+        [JsonProperty("origin")]
+        public string Origin { get; set; }
         [JsonProperty("bookmark")]
         public string Bookmark { get; set; }
     }

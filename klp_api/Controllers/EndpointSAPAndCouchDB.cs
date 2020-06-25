@@ -1,5 +1,4 @@
-﻿using klp_api.Models.Res;
-using klp_api.Models.Res.Categories;
+﻿using klp_api.Models.Res.Products;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -25,25 +24,18 @@ namespace klp_api.Controllers
                 switch (source)
                 {
                     case "products":
-                        endpoint = "http://52.250.109.79:5984/products/_find";
+                        endpoint = "http://142.93.60.130:5984/products/_find ";
                         break;
                 }
-                if (source == "category")
-                {
-                    httpResponseCouchDB = await httpClient.GetAsync(endpoint); //agregar endpoint de CouchDB a appsetings.
-                }
-                else
-                {
-                    httpResponseCouchDB = await httpClient.PostAsync(endpoint, httpContent);
-                }
+                httpResponseCouchDB = await httpClient.PostAsync(endpoint, httpContent);
                 httpResponse = httpResponseCouchDB;     //Validar origen de SAP o Coach cuando exista SAP
                 responseContent = await httpResponse.Content.ReadAsStringAsync();
                 jsonOut = source switch
                 {
-                    "products" => JsonConvert.DeserializeObject<ProductsBodyResModel>(responseContent),
+                    "products" => JsonConvert.DeserializeObject<ValidationProductsResBodyModel>(responseContent),
                     _ => null,
                 };
-                if (jsonOut.bookmark == "nil")
+                if (jsonOut.Bookmark == "nil")
                 {
                     jsonOut = null;
                 }

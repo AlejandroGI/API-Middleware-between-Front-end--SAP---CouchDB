@@ -27,5 +27,10 @@ namespace klp_api.Models.Res.Products
         [JsonProperty("bookmark")]
         public string Bookmark { get; set; }
     }
+    public class EndpointValidationProductsCodeResBodyModel
+    {
+        [JsonProperty("docs")]
+        public ProductsCodeResBodyModel[] Docs { get; set; }
+    }
 
 }

@@ -1,5 +1,6 @@
 ﻿//Clase modelo de estructura Object
 using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace klp_api.Models.Req
 {
@@ -59,4 +60,5 @@ namespace klp_api.Models.Req
             [JsonProperty("$eq")]
             public string Eq { get; set; }
         }
+
 }

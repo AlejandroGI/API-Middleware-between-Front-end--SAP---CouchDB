@@ -26,6 +26,9 @@ namespace klp_api.Controllers
                     case "products":
                         endpoint = "http://142.93.60.130:5984/products/_find ";
                         break;
+                    case "productsCode":
+                        endpoint = "http://142.93.60.130:5984/products/_find ";
+                        break;
                 }
                 httpResponseCouchDB = await httpClient.PostAsync(endpoint, httpContent);
                 httpResponse = httpResponseCouchDB;     //Validar origen de SAP o Coach cuando exista SAP
@@ -33,12 +36,13 @@ namespace klp_api.Controllers
                 jsonOut = source switch
                 {
                     "products" => JsonConvert.DeserializeObject<ValidationProductsResBodyModel>(responseContent),
+                    "productsCode" => JsonConvert.DeserializeObject<EndpointValidationProductsCodeResBodyModel>(responseContent),
                     _ => null,
                 };
-                if (jsonOut.Bookmark == "nil")
-                {
-                    jsonOut = null;
-                }
+                //if (jsonOut.Bookmark == "nil")
+                //{
+                //    jsonOut = null;
+                //}
                 statusCode = (int)httpResponse.StatusCode;
                 JsonAndStatusCode.Add(jsonOut);
                 JsonAndStatusCode.Add("CouchDB");       //Modificar el origen de datos

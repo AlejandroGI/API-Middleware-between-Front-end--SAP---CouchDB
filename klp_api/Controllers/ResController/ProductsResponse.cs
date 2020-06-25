@@ -7,6 +7,7 @@ namespace klp_api.Controllers.CouchDBResponseController
     public class ProductsResponse : ProductsRequest
     {
         private ValidationProductsResBodyModel _jsonObject;
+        private ValidationProductsCodeResBodyModel _jsonObjectCode;
         public dynamic ResponseProductsBody(dynamic res, string dataSource, string rut)
         {
             if (rut == null | rut == "")
@@ -22,13 +23,19 @@ namespace klp_api.Controllers.CouchDBResponseController
             return _jsonObject;
         }
 
-        public void ResponseProductsCodeBody (dynamic res, string dataSource, string rut)
+        public dynamic ResponseProductsCodeBody (dynamic res, string dataSource, string rut)
         {
             if (rut == null | rut == "")
             {
                 rut = "No se agregó rut a la petición";
             }
-            
+            _jsonObjectCode = new ValidationProductsCodeResBodyModel
+            {
+                Rut = rut,
+                Docs = res.Docs,
+                Origin = dataSource
+            };
+            return _jsonObjectCode;
         }
     }
 }

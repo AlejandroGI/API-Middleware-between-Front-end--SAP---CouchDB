@@ -1,5 +1,6 @@
 ﻿using klp_api.Controllers.CouchDBResponseController;
 using klp_api.Models.Req.Categories;
+using klp_api.Models.Res.Categories;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;

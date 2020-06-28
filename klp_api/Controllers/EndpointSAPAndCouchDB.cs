@@ -1,6 +1,6 @@
-﻿using klp_api.Models.Res.Products;
+﻿using klp_api.Models.Res.Categories;
+using klp_api.Models.Res.Products;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -25,13 +25,13 @@ namespace klp_api.Controllers
                 httpResponseCouchDB = await httpClient.PostAsync(endpoint, httpContent);
                 httpResponse = httpResponseCouchDB;     //Validar origen de SAP o Coach cuando exista SAP
                 responseContent = await httpResponse.Content.ReadAsStringAsync();
-                    jsonOut = source switch
-                    {
-                        "products" => JsonConvert.DeserializeObject<ValidationProductsResBodyModel>(responseContent),
-                        "productsCode" => JsonConvert.DeserializeObject<EndpointValidationProductsCodeResBodyModel>(responseContent),
-                        "categories" => JObject.Parse(JsonConvert.DeserializeObject(responseContent)),
-                        _ => null,
-                    };
+                jsonOut = source switch
+                {
+                    "products" => JsonConvert.DeserializeObject<ValidationProductsResBodyModel>(responseContent),
+                    "productsCode" => JsonConvert.DeserializeObject<EndpointValidationProductsCodeResBodyModel>(responseContent),
+                    "categories" => JsonConvert.DeserializeObject<ValidationCategoriesResBodyModel>(responseContent),
+                    _ => null,
+                };
                 //if (jsonOut.Bookmark == "nil")
                 //{
                 //    jsonOut = null;

@@ -1,6 +1,9 @@
-﻿using klp_api.Models.Req.Categories;
+﻿using klp_api.Controllers.CouchDBResponseController;
+using klp_api.Models.Req.Categories;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,36 +13,22 @@ namespace klp_api.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
+        private readonly EndpointSAPAndCouchDB _Endpoint = new EndpointSAPAndCouchDB();
         // GET: api/<CategoriesController>
         [HttpGet]
-        public IEnumerable<string> Get([FromBody] ValidationCategoriesReqBodyModel json)
+        public async Task<JsonResult> GetAsync([FromBody] ValidationCategoriesReqBodyModel jsonIn)
         {
-            return new string[] { "value1", "value2" };
+            var json = JsonConvert.SerializeObject(jsonIn, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            List<dynamic> Request = await _Endpoint.RequestProductsAsync(json, "categories");
+            if (Request != null)
+            {
+                return new JsonResult(Request[0]);
+            }
+            else
+            {
+                return new JsonResult("error en petición a endpoint CouchDB y SAP");
+            }
         }
 
-        // GET api/<CategoriesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<CategoriesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<CategoriesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<CategoriesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

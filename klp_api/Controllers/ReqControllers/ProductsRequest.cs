@@ -1,14 +1,20 @@
-﻿using klp_api.Models.Req;
-using klp_api.Models.Res.Products;
+﻿using klp_api.Models.Req.Products;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace klp_api.Controllers.CouchDBControllers
 {
     public class ProductsRequest
     {
-        public dynamic RequestProductsBody(string code , int? limit, int? skip)
+        private ValidationProductsReqBodyModel _jsonObject;
+        private ValidationProductsCodeReqBodyModel _jsonObjectCode;
+
+        public dynamic RequestProductsBody(string code, string name, int? limit, int? skip, string rut)
         {
+
+            if (name == null)
+            {
+                name = "";
+            }
             if (code == null)
             {
                 code = "";
@@ -18,50 +24,110 @@ namespace klp_api.Controllers.CouchDBControllers
                 limit = 10;
                 skip = 0;
             }
-            ValidationProductsReqBodyModel jsonObject = new ValidationProductsReqBodyModel
+            if (rut == null | rut == "")
             {
-                selector = new ProductsReqBodyModel()
+                _jsonObject = new ValidationProductsReqBodyModel
                 {
-                    code = new CodeClass()
+                    Selector = new Models.Req.ProductReqModel
                     {
-                        regex = code
-                    },
-                    or = new OrClass[]
-                    {
-                        new OrClass
+                        Or = new Models.Req.OrClass[]
                         {
-                            name = new NameClass
+                            new Models.Req.OrClass
                             {
-                                regex = code
+                                Code = new Models.Req.CodeClass
+                                {
+                                    Regex = code
+                                },
+                                Name = new Models.Req.NameClass
+                                {
+                                    Regex = name
+                                }
                             }
                         }
-                    }
-                },
-                fields = new List<string> { "code", "name", "rut" },
-                limit = (int)limit,
-                skip = (int)skip
-            };
-            dynamic json = JsonConvert.SerializeObject(jsonObject);
+                    },
+                    Fields = new string[] { "code", "name", "stock" },
+                    Limit = limit,
+                    Skip = skip
+                };
+            }
+            else
+            {
+                _jsonObject = new ValidationProductsReqBodyModel
+                {
+                    Selector = new Models.Req.ProductReqModel
+                    {
+                        Or = new Models.Req.OrClass[]
+                        {
+                            new Models.Req.OrClass
+                            {
+                                Code = new Models.Req.CodeClass
+                                {
+                                    Regex = code
+                                },
+                                Name = new Models.Req.NameClass
+                                {
+                                    Regex = code
+                                }
+                            }
+                        },
+                        And = new Models.Req.AndClass[]
+                        {
+                            new Models.Req.AndClass
+                            {
+                                Rut = new Models.Req.RutClass
+                                {
+                                    Eq = rut
+                                }
+                            }
+                        }
+                    },
+                    Fields = new string[] { "code", "name", "stock" },
+                    Limit = limit,
+                    Skip = skip
+                };
+            }
+            dynamic json = JsonConvert.SerializeObject(_jsonObject, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             return json;
         }
 
-        public dynamic RequestProductsCodeBody(string code)
+        public dynamic RequestProductsCodeBody(string code, string rut)
         {
             if (code == null)
             {
                 code = "";
             }
-            ValidationProductCodeBodyReqModel jsonObject = new ValidationProductCodeBodyReqModel
+            if (rut == null | rut == "")
             {
-                selector = new ProductsCodeReqBodyModel
+                _jsonObjectCode = new ValidationProductsCodeReqBodyModel
                 {
-                    code = new ProductCodeClass
+                    Selector = new Models.Req.ProductsCodeModel
                     {
-                        eq = code
+                        Code = new Models.Req.Code
+                        {
+                            Eq = code
+                        },
                     }
-                }
-            };
-            dynamic json = JsonConvert.SerializeObject(jsonObject);
+                };
+            }
+            else
+            {
+                _jsonObjectCode = new ValidationProductsCodeReqBodyModel
+                {
+                    Selector = new Models.Req.ProductsCodeModel
+                    {
+                        Code = new Models.Req.Code
+                        {
+                            Eq = code
+                        },
+                        Rut = new Models.Req.Rut
+                        {
+                            Eq = rut
+                        }
+                    }
+                };
+
+            }
+            dynamic json = JsonConvert.SerializeObject(_jsonObjectCode, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             return json;
         }
     }

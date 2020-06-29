@@ -1,6 +1,7 @@
 ﻿using klp_api.Controllers.CouchDBControllers;
 using klp_api.Controllers.CouchDBResponseController;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 
@@ -21,10 +22,10 @@ namespace klp_api.Controllers
         /// </summary>
         /// <param código="code"></param> 
         [HttpGet]
-        public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] int? limit, [FromQuery] int? skip, [FromQuery] string rut)
+        public async Task<JsonResult> Get([FromQuery] string code, [FromQuery] string name, [FromQuery] int? limit, [FromQuery] int? skip, [FromQuery] string rut)
         {
 
-            dynamic json = _Res.RequestProductsBody(code, limit, skip);
+            dynamic json = _Res.RequestProductsBody(code, name, limit, skip, rut);
             var Request = await _Endpoint.RequestProductsAsync(json, "products");
             if (Request != null)
             {
@@ -44,8 +45,8 @@ namespace klp_api.Controllers
         [HttpGet("{code}")]
         public async Task<JsonResult> GetCodeAsync(string code, [FromQuery] string rut)
         {
-            dynamic json = _Res.RequestProductsCodeBody(code);
-            var Request = await _Endpoint.RequestProductsAsync(json, "code");
+            dynamic json = _Res.RequestProductsCodeBody(code, rut);
+            var Request = await _Endpoint.RequestProductsAsync(json, "productsCode");
             if (Request != null)
             {
                 return new JsonResult(_Res.ResponseProductsCodeBody(Request[0], Request[1], rut));

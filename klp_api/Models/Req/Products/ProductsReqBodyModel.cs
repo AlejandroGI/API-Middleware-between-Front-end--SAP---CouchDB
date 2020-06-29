@@ -1,39 +1,64 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿//Clase modelo de estructura Object
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
-//Clase modelo de estructura Object
 namespace klp_api.Models.Req
 {
-
-    public class CodeClass
+    public class ProductReqModel
     {
-        [JsonProperty("$regex")]
-        public string regex { get; set; }
-    }
-    public class OrClass
-    {
-        public NameClass name { get; set; }
-    }
-    public class NameClass
-    {
-        [JsonProperty("$regex")]
-        public string regex { get; set; }
-    }
-    public class ProductsReqBodyModel
-    {
-        public CodeClass code { get; set; }
         [JsonProperty("$or")]
-        public OrClass[] or { get; set; }
+        public OrClass[] Or { get; set; }
+        [JsonProperty("$and")]
+        public AndClass[] And { get; set; }
+
     }
-    //~/api/Products/:Code
-    public class ProductsCodeReqBodyModel
+        public class OrClass
+        {
+            [JsonProperty("code")]
+            public CodeClass Code { get; set; }
+            [JsonProperty("name")]
+            public NameClass Name { get; set; }
+        }
+            public class CodeClass
+            {
+                [JsonProperty("$regex")]
+                public string Regex { get; set; }
+            }
+            public class NameClass
+            {
+                [JsonProperty("$regex")]
+                public string Regex { get; set; }
+            }
+
+        public class AndClass
+        {
+            [JsonProperty("rut")]
+            public RutClass Rut { get; set; }
+        }
+            public class RutClass
+            {
+                [JsonProperty("$eq")]
+                public string Eq { get; set; }
+            }
+    /*----------------------------------------------------------*/
+
+    public class ProductsCodeModel
     {
-        public ProductCodeClass code { get; set; }
+        [JsonProperty("code")]
+        public Code Code { get; set; }
+        [JsonProperty("rut")]
+        public Rut Rut { get; set; }
     }
-    public class ProductCodeClass
-    {
-        [JsonProperty("$eq")]
-        public string eq { get; set; }
-    }
+        
+        public class Code
+        {
+            [JsonProperty("$eq")]
+            public string Eq { get; set; }
+        }
+        public class Rut
+        {
+            [JsonProperty("$eq")]
+            public string Eq { get; set; }
+        }
 
 }

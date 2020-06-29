@@ -1,8 +1,20 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 
-namespace klp_api.Models.Res.Categories
+namespace klp_api.Models.Res.Products
 {
-    public class CategoriesResBodyModel
+    public class ProductsResBodyModel
+    {
+        [JsonProperty("code")]
+        public string Code { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("stock")]
+        public string Stock { get; set; }
+    }
+
+    public class ProductsCodeResBodyModel
     {
         [JsonProperty("_id")]
         public string Id { get; set; }
@@ -10,16 +22,14 @@ namespace klp_api.Models.Res.Categories
         public string Rev { get; set; }
         [JsonProperty("code")]
         public string Code { get; set; }
-        [JsonProperty("name")]
-        public string Name { get; set; }
         [JsonProperty("description")]
         public string Description { get; set; }
         [JsonProperty("groupName")]
         public string GroupName { get; set; }
         [JsonProperty("groupCode")]
-        public string GroupCode { get; set; }
+        public int GroupCode { get; set; }
         [JsonProperty("equality")]
-        public string Equality { get; set; }
+        public float Equality { get; set; }
         [JsonProperty("dc")]
         public string Dc { get; set; }
         [JsonProperty("unit")]
@@ -33,9 +43,9 @@ namespace klp_api.Models.Res.Categories
         [JsonProperty("equalityFormat")]
         public string EqualityFormat { get; set; }
         [JsonProperty("weightBox")]
-        public string WeightBox { get; set; }
+        public float WeightBox { get; set; }
         [JsonProperty("boxPallet")]
-        public string BoxPallet { get; set; }
+        public float BoxPallet { get; set; }
         [JsonProperty("termination")]
         public string Termination { get; set; }
         [JsonProperty("serie")]
@@ -50,7 +60,7 @@ namespace klp_api.Models.Res.Categories
         public string Brand { get; set; }
         [JsonProperty("webName")]
         public string WebName { get; set; }
-        [JsonProperty("category")]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        [JsonProperty("category")]
         public string Category { get; set; }
         [JsonProperty("subCategory")]
         public string SubCategory { get; set; }
@@ -63,9 +73,9 @@ namespace klp_api.Models.Res.Categories
         [JsonProperty("makerCode")]
         public string MakerCode { get; set; }
         [JsonProperty("stock")]
-        public string Stock { get; set; }
+        public int Stock { get; set; }
         [JsonProperty("isKit")]
-        public string IsKit { get; set; }
+        public int IsKit { get; set; }
         [JsonProperty("stockProvider")]
         public string StockProvider { get; set; }
         [JsonProperty("minSale")]

@@ -14,9 +14,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger/index.html",
       "environmentVariables": {
-        "EndPointCouchDB": "http://142.93.60.130:5984/products/_find",
         "UserCouchDB": "a2xw",
-        "EndpointSAP": "http://142.93.60.130:5984",
+        "EndpointCouchDB": "http://142.93.60.130",
+        "EndpointSAP": "http://142.93.60.130",
         "PasswordSAP": "false",
         "USerSAP": "false",
         "ASPNETCORE_ENVIRONMENT": "Development",

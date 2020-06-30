@@ -62,7 +62,8 @@ namespace klp_api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Middleware between KLP Web & CouchDB");
             });
-
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseAuthorization();

@@ -18,7 +18,6 @@ namespace klp_api.Controllers
             int statusCode;
             string dataSource;
             dynamic httpResponse;
-            string endpoint;
             List<dynamic> JsonAndStatusCode = new List<dynamic>();
             StringContent httpContent = new StringContent(json, null, "application/json");
             using (HttpClient httpClient = new HttpClient())

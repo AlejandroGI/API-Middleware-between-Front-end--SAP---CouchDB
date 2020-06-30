@@ -1,4 +1,5 @@
 ﻿using klp_api.Controllers.CouchDBResponseController;
+using klp_api.Controllers.ResController;
 using klp_api.Models.Req.Categories;
 using klp_api.Models.Res.Categories;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ namespace klp_api.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
+        private readonly CategoriesResponse _Res = new CategoriesResponse();
         private readonly EndpointSAPAndCouchDB _Endpoint = new EndpointSAPAndCouchDB();
         private readonly IConfiguration _Configuration;
         public CategoriesController(IConfiguration configuration)
@@ -29,7 +31,7 @@ namespace klp_api.Controllers
             List<dynamic> Request = await _Endpoint.RequestProductsAsync(json, "categories", _Configuration);
             if (Request != null)
             {
-                return new JsonResult(Request[0]);
+                return new JsonResult(_Res.ResponseProductsBody(Request[0], Request[1]));
             }
             else
             {

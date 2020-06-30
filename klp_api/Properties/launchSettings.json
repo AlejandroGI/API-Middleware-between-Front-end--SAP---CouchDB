@@ -12,9 +12,15 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "swagger/index.html",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "EndPointCouchDB": "\"http://142.93.60.130\"",
+        "UserCouchDB": "\"a2xw\"",
+        "EndpointSAP": "\"http://142.93.60.130\"",
+        "PasswordSAP": "false",
+        "USerSAP": "false",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "PasswordCouchDB": "\"VXByUUUzc2NDOFQ2c1A=\""
       }
     },
     "klp_api": {
@@ -30,7 +36,6 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/weatherforecast",
-      "environmentVariables": {},
       "httpPort": 21573
     }
   }

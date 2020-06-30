@@ -1,6 +1,7 @@
 ﻿using klp_api.Controllers.CouchDBControllers;
 using klp_api.Controllers.CouchDBResponseController;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
@@ -15,6 +16,11 @@ namespace klp_api.Controllers
         private readonly ProductsRequest _Req = new ProductsRequest();
         private readonly ProductsResponse _Res = new ProductsResponse();
         private readonly EndpointSAPAndCouchDB _Endpoint = new EndpointSAPAndCouchDB();
+        private readonly IConfiguration _Configuration;
+        public ProductsController(IConfiguration configuration)
+        {
+            _Configuration = configuration;
+        }
 
         //para obtener la lista de categorias
         /// <summary>
@@ -26,7 +32,7 @@ namespace klp_api.Controllers
         {
 
             dynamic json = _Res.RequestProductsBody(code, name, limit, skip, rut);
-            var Request = await _Endpoint.RequestProductsAsync(json, "products");
+            var Request = await _Endpoint.RequestProductsAsync(json, "products", _Configuration);
             if (Request != null)
             {
                 return new JsonResult(_Res.ResponseProductsBody(Request[0], Request[1], rut));
@@ -46,7 +52,7 @@ namespace klp_api.Controllers
         public async Task<JsonResult> GetCodeAsync(string code, [FromQuery] string rut)
         {
             dynamic json = _Res.RequestProductsCodeBody(code, rut);
-            var Request = await _Endpoint.RequestProductsAsync(json, "productsCode");
+            var Request = await _Endpoint.RequestProductsAsync(json, "productsCode", _Configuration);
             if (Request != null)
             {
                 return new JsonResult(_Res.ResponseProductsCodeBody(Request[0], Request[1], rut));

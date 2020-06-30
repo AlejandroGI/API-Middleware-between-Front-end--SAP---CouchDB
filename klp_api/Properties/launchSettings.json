@@ -16,9 +16,9 @@
       "environmentVariables": {
         "UserCouchDB": "a2xw",
         "EndpointCouchDB": "http://142.93.60.130",
-        "EndpointSAP": "http://142.93.60.130",
+        "EndpointSAP": "http://kakashihitch.ddns.net",
+        "UserSAP": "false",
         "PasswordSAP": "false",
-        "USerSAP": "false",
         "ASPNETCORE_ENVIRONMENT": "Development",
         "PasswordCouchDB": "VXByUUUzc2NDOFQ2c1A="
       }

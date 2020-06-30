@@ -1,6 +1,5 @@
 ﻿//Clase modelo de estructura Object
 using Newtonsoft.Json;
-using System.Text.Json.Serialization;
 
 namespace klp_api.Models.Req
 {

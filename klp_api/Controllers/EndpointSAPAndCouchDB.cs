@@ -85,7 +85,7 @@ namespace klp_api.Controllers
 
                     {
                         //validar endpoint desde variables de entorno o appsettings
-                        if (bool.Parse(Environment.GetEnvironmentVariable("EndpointSAP")) == true)
+                        if (Environment.GetEnvironmentVariable("EndpointSAP") != "")
                         {
                             string endpoint = $"{Environment.GetEnvironmentVariable("EndpointSAP")}:{_Configuration["EndpointSettings:Endpoint:SAPEndpoint:Port"]}{path}";
                             return endpoint;

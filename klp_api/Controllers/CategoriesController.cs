@@ -2,6 +2,7 @@
 using klp_api.Controllers.ResController;
 using klp_api.Models.Req.Categories;
 using klp_api.Models.Res.Categories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;

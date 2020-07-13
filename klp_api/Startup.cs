@@ -31,11 +31,11 @@ namespace klp_api
                     Version = "v1",
                     Title = "API Middleware between KLP Web & CouchDB",
                     Description = "API Middleware between KLP Web & CouchDB",
-                    TermsOfService = new Uri("http://hitch.cl/"),
+                    TermsOfService = new Uri("https://github.com/AlejandroGI"),
                     Contact = new OpenApiContact
                     {
                         Name = "Alejandro Gutiérrez",
-                        Email = "agutierrez@itinnovation.cl",
+                        Email = "alejandro_gutierrez.i@outlook.cl",
                     },
                 });
 
